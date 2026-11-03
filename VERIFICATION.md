@@ -1,3 +1,14 @@
+## YYDS 本地适配（2026-11-02）
+
+对照相邻 new api 项目的 readme.md、部署记录、router/relay-router.go、controller/model.go 和 web/src/features/keys/constants.ts：
+
+- 默认 API 根地址修正为 https://api.yyds.page，客户端需要时追加 /v1；控制台为 https://console.yyds.page。
+- New API 使用 Bearer Token 的 /v1/models 返回标准 data 模型列表，现有解析兼容；未发现 /v1/sub2api/connect 专用能力接口，继续按未知能力降级。模型列表不代表工具搜索、图片或真实调用已验证。
+- 移除虚构的 YYDS GitHub 发布下载说明，历史来源链接恢复为原仓库。
+- 应用、网页及平台图标采用用户提供的 icon/favicon.ico；跨平台图标由其最大 256×256 图层生成，Windows ICO 保留原文件。
+- 构建钩子使用 npm run，避免当前环境的 pnpm 包装器触发依赖安装错误。
+- 本轮 13 项前端测试和 TypeScript 检查通过；未连接生产网关，未读取管理员凭据，未发起付费调用。以下是原项目历史验证记录，不作为 YYDS 部署验收。
+
 # v0.1.6 验证记录
 
 2026-10-19：对照 CC Switch v4.0.15 及当日主分支，补齐第三方配置兼容性；具体范围见 [COMPATIBILITY.md](COMPATIBILITY.md)。
@@ -29,7 +40,7 @@
 
 ## 原因与修正
 
-Connect 之前只请求普通 `/v1/models`，得到模型名称后生成了 `input_modalities: ["text"]`。SuperGPT 已在带 `client_version` 的 Codex 模型目录中声明图片能力，导入工具却没有获取该目录。已有测试覆盖了配置读写、文本调用、上下文与思考强度，没有验证图片附件能否发出。
+Connect 之前只请求普通 `/v1/models`，得到模型名称后生成了 `input_modalities: ["text"]`。yyds 已在带 `client_version` 的 Codex 模型目录中声明图片能力，导入工具却没有获取该目录。已有测试覆盖了配置读写、文本调用、上下文与思考强度，没有验证图片附件能否发出。
 
 0.1.4 为 Codex 桌面版及终端版请求完整模型目录，保留服务端声明的图片能力。仅当第三方网关拒绝该查询参数时，才回退一次普通目录；认证失败、重定向、限流和服务器错误不触发回退。服务端明确声明“仅文字”的模型仍保持原能力。
 

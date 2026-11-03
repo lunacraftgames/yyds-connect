@@ -1,19 +1,19 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "SuperGPT Connect",
+  "productName": "yyds Connect",
   "version": "0.1.6",
-  "identifier": "dev.supergpt.connect",
+  "identifier": "dev.yyds.connect",
   "build": {
     "frontendDist": "../dist",
     "devUrl": "http://127.0.0.1:1420",
-    "beforeDevCommand": "pnpm dev:web",
-    "beforeBuildCommand": "pnpm build:web"
+    "beforeDevCommand": "npm run dev:web",
+    "beforeBuildCommand": "npm run build:web"
   },
   "app": {
     "windows": [
       {
         "label": "main",
-        "title": "SuperGPT Connect",
+        "title": "yyds Connect",
         "width": 740,
         "height": 800,
         "minWidth": 380,

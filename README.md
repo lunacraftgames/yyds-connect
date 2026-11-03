@@ -1,21 +1,22 @@
-<p align="center"><img src="public/supergpt.png" alt="SuperGPT Connect" width="96"></p>
+<p align="center"><img src="public/yyds.png" alt="yyds Connect" width="96"></p>
 
-# SuperGPT Connect
+# yyds Connect
 
 一个简单的本地 API 配置器。选择中转站、选择 Claude 或 Codex、填写密钥、勾选模型，然后导入。
 
-**v0.1.6** · [下载](https://github.com/superpilot69/supergpt-connect/releases/tag/v0.1.6) · [反馈问题](https://github.com/superpilot69/supergpt-connect/issues) · [MIT 许可](LICENSE)
+**v0.1.6** · [源码](https://github.com/lunacraftgames/yyds-connect) · [MIT 许可](LICENSE)
 
 ## 下载与使用
 
-| 系统 | 下载 | 打开方式 |
-| --- | --- | --- |
-| Windows 10 / 11 · x64 | [Windows 免安装 ZIP](https://github.com/superpilot69/supergpt-connect/releases/download/v0.1.6/SuperGPT-Connect-0.1.6-Windows-x64-portable.zip) | 全部解压，双击 `SuperGPT Connect.exe` |
-| macOS · Apple Silicon | [Mac ZIP](https://github.com/superpilot69/supergpt-connect/releases/download/v0.1.6/SuperGPT-Connect-0.1.6-macOS-arm64.zip) | 解压后打开 `.app`，也可拖入「应用程序」 |
+YYDS 定制版在本地构建，尚未发布到 GitHub Releases。
 
-本页下载使用 [GitHub Releases](https://github.com/superpilot69/supergpt-connect/releases/tag/v0.1.6)。[SHA-256 校验值](https://github.com/superpilot69/supergpt-connect/releases/download/v0.1.6/SHA256SUMS.txt) 也在同一版本下。Mac 包仅支持 M 系列芯片，不支持 Intel Mac。
+- Windows 10 / 11 x64：构建后解压 `release/yyds-Connect-0.1.6-Windows-x64-portable.zip`，运行 `yyds Connect.exe`。
+- macOS Apple Silicon：需要在 Mac 上运行打包脚本；当前未生成 YYDS Mac 包。
+- 校验文件：`release/SHA256SUMS.txt`。
 
-当前版本通过 macOS 与 Windows 原生自动测试，并使用真实 Codex app-server 验证图片发送、上下文、思考强度、重复导入与恢复。详细范围见 [验证记录](VERIFICATION.md)。
+默认 API 根地址为 `https://api.yyds.page`，控制台为 https://console.yyds.page。New API 的标准模型目录不提供线路能力证明；工具搜索等能力按未验证处理，不自动宣称可用。
+
+[验证记录](VERIFICATION.md) 中原项目的历史记录不代表 YYDS 网关已完成真实调用验证。
 
 运行时无需安装 Node.js 或 Rust。Windows 使用系统 WebView2 Runtime；缺少时，按应用提示从 [微软官网](https://developer.microsoft.com/microsoft-edge/webview2/) 安装。Windows 包未进行发布者签名；Mac 包使用 ad-hoc 签名，尚未完成 Apple Developer ID 签名与公证。校验值见 Release 的 `SHA256SUMS.txt`。
 
@@ -35,7 +36,7 @@ GPT‑6.1 Sol 按发布的 Codex 目录使用默认上下文 272,000、最大可
 
 ### 配置步骤
 
-1. **选择中转站**：默认 [SuperGPT](https://console.supergpt.dev)，也可以添加自己的站点。一次只使用一个。
+1. **选择中转站**：默认 [yyds](https://console.yyds.page)，也可以添加自己的站点。一次只使用一个。
 2. **选择客户端**：选择 Claude 或 Codex，再选择桌面版、终端版或 VS Code 扩展。
 3. **输入 API Key**：点击获取可用模型，读取站点的 `/v1/models`。
 4. **勾选模型并导入**：选择需要的模型，指定默认模型，点击导入。
@@ -66,7 +67,7 @@ GPT‑6.1 Sol 按发布的 Codex 目录使用默认上下文 272,000、最大可
 - 写入前自动备份，使用文件锁、原子替换与中断恢复，避免部分配置被覆盖。
 - 导入后若又修改了配置，恢复前会要求确认，同时保留当前内容的副本。
 - 没有恢复记录时不会重置客户端。恢复的是本机文件，不能让服务端失效的登录令牌重新有效。
-- 恢复记录位于用户目录的 `.supergpt-connect`，可能含有原凭据，请不要公开上传。macOS / Linux 新写入的配置文件权限为 `0600`。
+- 恢复记录位于用户目录的 `.yyds-connect`，可能含有原凭据，请不要公开上传。macOS / Linux 新写入的配置文件权限为 `0600`。
 
 Codex 的外部模型目录会替换内置目录。网关提供能力元数据时优先采用；仅提供模型名称时，已知模型按公开的 Codex 目录补全思考档位和上下文参数。未知别名可采用本机 Codex 缓存中同名模型的容量，或同一站点现有目录中的手工修正；仍无法确认容量时，导入会停止并提示，客户端文件保持原样。视觉等能力仍需网关明确提供。
 
@@ -85,7 +86,7 @@ cargo build --manifest-path src-tauri/Cargo.toml --no-default-features --locked 
 python scripts/verify-codex-runtime.py --download-codex
 ```
 
-[跨平台 CI](https://github.com/superpilot69/supergpt-connect/actions/workflows/verify.yml) 在 macOS 和 Windows 原生执行测试、Codex 联调及打包；运行报告与构建包保存在对应任务的 artifacts 中。
+[跨平台 CI](https://github.com/lunacraftgames/yyds-connect/actions/workflows/verify.yml) 在 macOS 和 Windows 原生执行测试、Codex 联调及打包；运行报告与构建包保存在对应任务的 artifacts 中。
 
 `pnpm dev:web` 只预览界面，不会修改本机配置。打包：
 
@@ -120,7 +121,7 @@ Rust 测试使用临时用户目录和虚构密钥。原生 debug 界面可使�
 ```sh
 python3 scripts/mock-gateway.py
 # 在另一终端中，使用已构建的 debug 应用：
-SUPERGPT_CONNECT_TEST_HOME=/absolute/path/to/test-home src-tauri/target/debug/supergpt-connect
+yyds_CONNECT_TEST_HOME=/absolute/path/to/test-home src-tauri/target/debug/yyds-connect
 ```
 
 添加站点 `http://127.0.0.1:18473`，输入虚构 Key `sk-local-fixture-only`。模拟网关只返回模型目录，不调用真实模型。测试目录覆盖仅在 debug 构建生效，界面会显示测试模式。

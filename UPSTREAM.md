@@ -23,7 +23,7 @@
 未包含上游的代理转发、自动故障切换、统计、MCP/Skills 管理、订阅登录、云同步、托盘、自动更新或深链接处理器。没有继承上游更新地址或应用标识，也不读取 CC Switch 数据库。
 
 
-品牌资源：应用界面与打包图标使用 SuperGPT 的 S 标志，配色来自 [SuperGPT 控制台](https://console.supergpt.dev)。
+品牌资源：YYDS 图标来自用户提供的 `icon/favicon.ico`；前端及各平台图标从其中的 256×256 PNG 图层生成。
 
 VS Code 注释保留使用 `jsonc-parser` 0.34.0（MIT），许可证随包附带于 `licenses/jsonc-parser-MIT.txt`。
 
@@ -50,7 +50,7 @@ v0.1.3 同时保留发布目录中的 `multi_agent_reasoning_effort`。Codex 0.1
 
 - `src/utils/claudeEditorOverlay.ts`：第三方网关 AUTO_MODE_SERVER 默认关闭。
 - `src/components/providers/forms/CommonConfigEditor.tsx`：Artifact 与 ToolSearch 独立开关；自动更新和提交署名属于用户偏好，Connect 不替用户改动。
-- `src-tauri/src/live/project/codex.rs`：线路内 Bearer 凭据、保留官方登录、清理保留 provider 名称。Connect 使用独立 `supergpt-connect` ID，`requires_openai_auth=false` 避免回退到官方凭据；真实 0.143 / 0.162 请求验证。
+- `src-tauri/src/live/project/codex.rs`：线路内 Bearer 凭据、保留官方登录、清理保留 provider 名称。Connect 使用独立 `yyds-connect` ID，`requires_openai_auth=false` 避免回退到官方凭据；真实 0.143 / 0.162 请求验证。
 - `src-tauri/src/live/floor.rs` / `claude_desktop_config.rs`：provider 字段归属、旧桌面网关迁移和 Windows 后缀目录；Connect 对多个候选目录报错，不任意选首个。
 - main 中 5.5 proxy alias 修正用于 CC Switch 本地代理模型映射。Connect 直连保留网关返回的实际 ID，不移植无法反向映射的假别名。
 
